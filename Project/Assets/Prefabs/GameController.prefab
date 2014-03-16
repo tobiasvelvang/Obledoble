@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -39,8 +40,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberOfCircles: 0
-  AverageCircleRadius: 0
-  StageSizePixels: {x: 0, y: 0}
+  RadiusRange: {x: .100000001, y: .300000012}
+  Stage:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 9
+    height: 16
+  CirclePrefab: {fileID: 100000, guid: 3faef32c8d738254b9412a0c53be5597, type: 2}
+  WallPrefab: {fileID: 100000, guid: af6d713fe6577d340945a1c2da898fa1, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b39d4bfe23f06948a45683aafe4d6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cannonObject: {fileID: 100002, guid: 132237600170a974eb9cd4ae4669e276, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

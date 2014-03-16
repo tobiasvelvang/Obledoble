@@ -4,8 +4,9 @@ using System;
 
 public class ProjectileEvent: EventArgs{
 	public Projectile projectile;
+	public GameObject other;
 }
-public delegate void OnProjectileFireHandler(object sender, ProjectileEvent args);
+
 public delegate void OnProjectileCollideHandler(object sender, ProjectileEvent args);
 
 public class Projectile : MonoBehaviour {
@@ -13,13 +14,12 @@ public class Projectile : MonoBehaviour {
 	public float Speed;
 	public GameObject PathNodePrefab;
 	public float NodePlacementDistance;
-	public OnProjectileFireHandler onFireHandler;
+
 	public OnProjectileCollideHandler onCollideHandler;
 	private float TraveledDistance;
 
 	void Start () {
-		if (onFireHandler != null)
-			onFireHandler (this, new ProjectileEvent { projectile = this });
+
 
 
 		Direction.Normalize ();
@@ -43,13 +43,12 @@ public class Projectile : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 		Debug.Log ("col");
-		if (col.gameObject.layer == LayerMask.NameToLayer ("Circles")) {
-			Destroy(gameObject);
+
 			if(onCollideHandler != null)
-				onCollideHandler(this, new ProjectileEvent{ projectile = this });
+				onCollideHandler(this, new ProjectileEvent{ projectile = this , other = col.gameObject});
 
 
-		}
+
 	}
 
 	void PlacePathNode(Vector2 position){
