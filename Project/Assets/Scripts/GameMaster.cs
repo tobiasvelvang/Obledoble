@@ -17,7 +17,7 @@ public class GameMaster : MonoBehaviour {
 		cannon.onCannonFire += onFire;
 		cannon.canFire = true;
 		textMesh = GetComponent<TextMesh> ();
-		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed;
+		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
 
 	
 	}
@@ -28,7 +28,7 @@ public class GameMaster : MonoBehaviour {
 			timelapsed += Time.deltaTime*5;
 				}
 
-		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed;
+		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
 
 
 	}
@@ -40,7 +40,7 @@ public class GameMaster : MonoBehaviour {
 						textMesh.text = "Game over";
 				} else {
 						shootsLeft = shootsLeft - 1;
-						textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed;
+			textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
 		}
 
 
@@ -50,9 +50,14 @@ public class GameMaster : MonoBehaviour {
 		if(other.layer == LayerMask.NameToLayer("circles")){
 			Destroy(args.projectile.gameObject);
 			cannon.canFire = true;
-		}if (shootsLeft == 0) {
-						cannon.canFire = false;
+		
+		}if (other.layer == LayerMask.NameToLayer ("walls")) {
+			multiplier += 1;
 				}
+		if (shootsLeft == 0) {
+						cannon.canFire = false;
+						textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
+		}
 
 	}
 
