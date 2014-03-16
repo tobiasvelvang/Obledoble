@@ -35,9 +35,6 @@ public class Spawner : MonoBehaviour {
 		float adjust = Mathf.Min (vertical-(Stage.yMax + top.renderer.bounds.extents.y*2), horizontal - (Stage.xMax + left.renderer.bounds.extents.x*2));
 
 		Camera.main.orthographicSize -= adjust/2;
-		Debug.Log (vertical);
-		Debug.Log (horizontal);
-		Debug.Log (adjust);
 
 		Vector3 cameraPosition = new Vector3 ((Stage.xMax) / 2, Stage.yMax / 2,-10);
 		Camera.main.transform.position = cameraPosition;

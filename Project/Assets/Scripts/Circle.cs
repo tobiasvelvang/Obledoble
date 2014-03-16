@@ -17,12 +17,14 @@ public class Circle : MonoBehaviour {
 
 
 	void Update () {
-		if (transform.localScale.x < Radius) {
+		if (renderer.bounds.extents.x < Radius) {
 			Vector2 temp = transform.localScale;
 			temp.x += AnimationSpeed*Time.deltaTime;
 			temp.y += AnimationSpeed*Time.deltaTime;
 			transform.localScale = temp;
-			((CircleCollider2D)collider2D).radius = Radius/transform.localScale.x-0.05f;
+			((CircleCollider2D)collider2D).radius = renderer.bounds.extents.x/transform.localScale.x;
+		
+
 		}
 	
 	}

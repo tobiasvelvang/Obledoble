@@ -14,16 +14,13 @@ public class Projectile : MonoBehaviour {
 	public float Speed;
 	public GameObject PathNodePrefab;
 	public float NodePlacementDistance;
-
 	public OnProjectileCollideHandler onCollideHandler;
 	private float TraveledDistance;
-
+	private ArrayList nodes;
 	void Start () {
-
-
-
 		Direction.Normalize ();
 		rigidbody2D.velocity = Direction * Speed;
+		nodes = new ArrayList ();
 	}
 	
 
@@ -64,9 +61,15 @@ public class Projectile : MonoBehaviour {
 
 	}
 
+	void OnDestroy(){
+
+		foreach (GameObject node in nodes)
+			Destroy (node);
+	}
 	void PlacePathNode(Vector2 position){
 		GameObject node = (GameObject)Instantiate (PathNodePrefab);
 		node.transform.position = position;
+		nodes.Add (node);
 	}
 
 
