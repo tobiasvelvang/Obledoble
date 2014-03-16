@@ -10,6 +10,7 @@ public class Circle : MonoBehaviour {
 		scale.x = 0;
 		scale.y = 0;
 		this.transform.localScale = scale;
+		((CircleCollider2D)collider2D).radius = Radius*2;
 
 	}
 
@@ -21,6 +22,7 @@ public class Circle : MonoBehaviour {
 			temp.x += AnimationSpeed*Time.deltaTime;
 			temp.y += AnimationSpeed*Time.deltaTime;
 			transform.localScale = temp;
+			((CircleCollider2D)collider2D).radius = Radius/transform.localScale.x-0.05f;
 		}
 	
 	}
