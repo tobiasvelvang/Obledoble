@@ -23,7 +23,7 @@ public class Circle : MonoBehaviour {
 			temp.y += AnimationSpeed*Time.deltaTime;
 			transform.localScale = temp;
 			((CircleCollider2D)collider2D).radius = renderer.bounds.extents.x/transform.localScale.x;
-			Debug.Log(renderer.bounds.extents);
+		
 
 		}
 	
