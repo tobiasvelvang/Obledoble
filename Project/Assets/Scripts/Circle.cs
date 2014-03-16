@@ -4,7 +4,7 @@ using System.Collections;
 public class Circle : MonoBehaviour {
 	public float Radius;
 	public float AnimationSpeed;
-	// Use this for initialization
+
 	void Start () {
 		Vector2 scale = transform.localScale;
 		scale.x = 0;
@@ -14,7 +14,7 @@ public class Circle : MonoBehaviour {
 	}
 
 
-	// Update is called once per frame
+
 	void Update () {
 		if (transform.localScale.x < Radius) {
 			Vector2 temp = transform.localScale;
