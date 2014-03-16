@@ -6,7 +6,7 @@ public class ColliderAdjuster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		CircleCollider2D collider = (CircleCollider2D)collider2D;
-		collider.radius = renderer.bounds.extents.x;
+		collider.radius = renderer.bounds.extents.x/transform.localScale.x;
 
 	}
 	
