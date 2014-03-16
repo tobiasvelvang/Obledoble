@@ -20,7 +20,7 @@ public class GameMaster : MonoBehaviour {
 		cannon.onCannonFire += onFire;
 		cannon.canFire = true;
 		textMesh = GetComponent<TextMesh> ();
-		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
+		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "X" + multiplier;
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
 		changeScore (0);
 	
