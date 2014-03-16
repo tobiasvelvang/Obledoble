@@ -4,9 +4,10 @@ using System.Collections;
 public class GameMaster : MonoBehaviour {
 	public GameObject cannonObject;
 	public int shootsLeft = 3;
-	public int timelapsed = 0;
+	public float timelapsed = 0F;
 	TextMesh textMesh;
 	TextMesh score;
+	public int multiplier = 0;
 
 	Cannon cannon;
 
@@ -16,15 +17,18 @@ public class GameMaster : MonoBehaviour {
 		cannon.onCannonFire += onFire;
 		cannon.canFire = true;
 		textMesh = GetComponent<TextMesh> ();
-		textMesh.text = "Shots left: " + shootsLeft + "Score: " + timelapsed/10;
+		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed;
 
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		timelapsed += 1;
-		textMesh.text = "Shots left: " + shootsLeft + "Score: " + timelapsed/10;
+		if (!(cannon.canFire)) {
+			timelapsed += Time.deltaTime*5;
+				}
+
+		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed;
 
 
 	}
@@ -36,7 +40,7 @@ public class GameMaster : MonoBehaviour {
 						textMesh.text = "Game over";
 				} else {
 						shootsLeft = shootsLeft - 1;
-						textMesh.text = "Shots left: " + shootsLeft + "Score: " + timelapsed/10;
+						textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed;
 		}
 
 
