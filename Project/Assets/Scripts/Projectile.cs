@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+
 public class ProjectileEvent: EventArgs{
 	public Projectile projectile;
 }
 public delegate void OnProjectileFireHandler(object sender, ProjectileEvent args);
 public delegate void OnProjectileCollideHandler(object sender, ProjectileEvent args);
+
 public class Projectile : MonoBehaviour {
 	public Vector2 Direction;
 	public float Speed;
