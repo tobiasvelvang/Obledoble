@@ -11,9 +11,13 @@ public class Spawner : MonoBehaviour {
 	void Start () {
 		SpawnCircles (NumberOfCircles, RadiusRange, Stage);
 		GameObject left = (GameObject)Instantiate (WallPrefab);
+		left.tag = "left";
 		GameObject top = (GameObject)Instantiate (WallPrefab);
+		top.tag = "top";
 		GameObject right = (GameObject)Instantiate (WallPrefab);
+		right.tag = "right";
 		GameObject bottom = (GameObject)Instantiate (WallPrefab);
+		bottom.tag = "bottom";
 
 		left.transform.position = new Vector2 (Stage.xMin - left.renderer.bounds.extents.x, Stage.yMax / 2);
 		left.transform.localScale = new Vector2 ( 1, Stage.yMax/(bottom.renderer.bounds.extents.y * 2));

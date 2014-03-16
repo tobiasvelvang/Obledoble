@@ -27,7 +27,11 @@ public class Projectile : MonoBehaviour {
 	}
 	
 
+	void FixedUpdate(){
+		rigidbody2D.velocity = Direction*Speed;
+	}
 	void Update () {
+
 		Vector2 temp = transform.position;
 		Vector2 movement = Direction * Speed*Time.deltaTime;;
 		temp += movement;
@@ -42,10 +46,19 @@ public class Projectile : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col){
-		Debug.Log ("col");
+		GameObject other = col.gameObject;
+		if(other.layer == LayerMask.NameToLayer("walls")){
 
-			if(onCollideHandler != null)
-				onCollideHandler(this, new ProjectileEvent{ projectile = this , other = col.gameObject});
+			if(other.CompareTag("left") || other.CompareTag("right"))
+				Direction.x *= -1;
+			else{
+				Direction.y *= -1;
+			}
+			rigidbody2D.velocity = Direction*Speed;
+		}
+
+		if(onCollideHandler != null)
+			onCollideHandler(this, new ProjectileEvent{ projectile = this , other = col.gameObject});
 
 
 
