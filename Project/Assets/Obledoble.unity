@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24bf12f30c1e4842a3cf8ffae094aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfCircles: 10
-  RadiusRange: {x: .600000024, y: 2.29999995}
+  NumberOfCircles: 15
+  RadiusRange: {x: .200000003, y: .5}
   Stage:
     serializedVersion: 2
     x: 0
@@ -353,7 +353,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: NumberOfCircles
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: cannonObject
@@ -361,11 +361,11 @@ Prefab:
       objectReference: {fileID: 1694744899}
     - target: {fileID: 11400000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: RadiusRange.x
-      value: .600000024
+      value: .200000003
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: RadiusRange.y
-      value: 2.29999995
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
