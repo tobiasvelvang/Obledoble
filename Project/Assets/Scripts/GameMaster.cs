@@ -10,7 +10,8 @@ public class GameMaster : MonoBehaviour {
 	TextMesh score;
 	TextMesh totalScoreField;
 	float totalScore;
-	public int multiplier = 0;
+	public int multiplier = 1;
+	public bool gamedone;
 
 	Cannon cannon;
 
@@ -33,11 +34,11 @@ public class GameMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!(cannon.canFire)) {
-			timelapsed += Time.deltaTime*5;
+		if (!(cannon.canFire) && !(gamedone)) {
+			timelapsed += Time.deltaTime*10;
 				}
 		if (shootsLeft == 0) {
-						textMesh.text = "Game over";
+						
 				} else {
 						textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
 				}
@@ -48,7 +49,7 @@ public class GameMaster : MonoBehaviour {
 		args.projectile.onCollideHandler += onCollide ;
 		cannon.canFire = false;
 		if (shootsLeft == 0) {
-						textMesh.text = "Game over";
+						
 				} else {
 						shootsLeft = shootsLeft - 1;
 			textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
@@ -64,13 +65,16 @@ public class GameMaster : MonoBehaviour {
 			changeScore(totalScore + timelapsed * multiplier);
 			timelapsed = 0F;
 			multiplier = 0;
+			if(shootsLeft == 0){
+				gamedone = true;
+			}
 		
 		}if (other.layer == LayerMask.NameToLayer ("walls")) {
 			multiplier += 1;
 				}
 		if (shootsLeft == 0) {
 						cannon.canFire = false;
-						textMesh.text = "Game Over";
+						
 		}
 
 	}
