@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour {
 		if (onFireHandler != null)
 			onFireHandler (this, new ProjectileEvent { projectile = this });
 
+
 		Direction.Normalize ();
 		rigidbody2D.velocity = Direction * Speed;
 	}
