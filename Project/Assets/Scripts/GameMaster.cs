@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour {
 	TextMesh score;
 	TextMesh totalScoreField;
 	float totalScore;
-	public int multiplier = 0;
+	public int multiplier = 1;
 
 	Cannon cannon;
 
