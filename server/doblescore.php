@@ -37,7 +37,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $hash = $_POST['hash'];
     $name = $_POST['name'];
     $score = $_POST['score'];
-    if(md5($name.$score.$secret)== $hash){
+
+    if(sha1($name.$score.$secret)== $hash){
 
         $statement = $db->prepare('INSERT INTO scores VALUES(:name,:score)');
         try{
