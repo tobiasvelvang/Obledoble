@@ -63,7 +63,7 @@ public class GameMaster : MonoBehaviour {
 			cannon.canFire = true;
 			changeScore(totalScore + timelapsed * multiplier);
 			timelapsed = 0F;
-			multiplier = 0;
+			multiplier = 1;
 		
 		}if (other.layer == LayerMask.NameToLayer ("walls")) {
 			multiplier += 1;
