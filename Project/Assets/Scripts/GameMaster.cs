@@ -34,7 +34,7 @@ public class GameMaster : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!(cannon.canFire)) {
-			timelapsed += Time.deltaTime*5;
+			timelapsed += Time.deltaTime*15;
 				}
 		if (shootsLeft == 0) {
 						textMesh.text = "Game over";
