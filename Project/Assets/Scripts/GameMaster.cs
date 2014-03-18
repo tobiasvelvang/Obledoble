@@ -11,7 +11,9 @@ public class GameMaster : MonoBehaviour {
 	TextMesh totalScoreField;
 	float totalScore;
 	public int multiplier = 1;
+
 	public bool gamedone;
+
 
 	Cannon cannon;
 
@@ -34,8 +36,10 @@ public class GameMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (!(cannon.canFire) && !(gamedone)) {
 			timelapsed += Time.deltaTime*10;
+
 				}
 		if (shootsLeft == 0) {
 						
@@ -68,6 +72,7 @@ public class GameMaster : MonoBehaviour {
 			if(shootsLeft == 0){
 				gamedone = true;
 			}
+
 		
 		}if (other.layer == LayerMask.NameToLayer ("walls")) {
 			multiplier += 1;
