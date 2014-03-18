@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0}
-  Speed: 40
+  Speed: 10
   PathNodePrefab: {fileID: 100000, guid: 23c1f25751430474da6f9ff625a31c76, type: 2}
   NodePlacementDistance: .699999988
 --- !u!114 &11400002
