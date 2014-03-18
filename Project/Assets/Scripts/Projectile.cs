@@ -10,6 +10,7 @@ public class ProjectileEvent: EventArgs{
 public delegate void OnProjectileCollideHandler(object sender, ProjectileEvent args);
 
 public class Projectile : MonoBehaviour {
+
 	public Vector2 Direction;
 	public float Speed;
 	public GameObject PathNodePrefab;
