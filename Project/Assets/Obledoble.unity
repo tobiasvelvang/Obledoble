@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b39d4bfe23f06948a45683aafe4d6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfCircles: 8
+  NumberOfCircles: 7
   RadiusRange: {x: .100000001, y: .400000006}
   cannonObject: {fileID: 1694744899}
   scoreTextObject: {fileID: 68350762}
@@ -773,7 +773,7 @@ Prefab:
       objectReference: {fileID: 68350762}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: NumberOfCircles
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: RadiusRange.x

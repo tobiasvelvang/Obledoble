@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0}
-  Speed: 12
+  Speed: 40
   PathNodePrefab: {fileID: 100000, guid: 23c1f25751430474da6f9ff625a31c76, type: 2}
   NodePlacementDistance: .699999988
 --- !u!114 &11400002
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: 0682921a9bc88c94fb070f86dfcee9ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e25e68cc64eb684f977e37bb7553dbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -28,10 +28,15 @@ public class GameMaster : MonoBehaviour {
 	
 		spawner = GetComponent<Spawner> ();
 		spawner.SpawnCircles (NumberOfCircles, RadiusRange);
+
+		//Add "anti cheat"
+		spawner.SpawnCircle (0.5f, new Vector2 (spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
+		spawner.SpawnCircle (0.06f, new Vector2 (spawner.Stage.xMax/2, spawner.Stage.yMax));
 		textMesh = GetComponent<TextMesh> ();
 		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "X" + multiplier;
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
 		changeScore (0);
+
 	
 	}
 	void changeScore(float newScore){
@@ -60,8 +65,8 @@ public class GameMaster : MonoBehaviour {
 		cannon.canFire = false;
 		if (shootsLeft == 0) {
 						
-				} else {
-						shootsLeft = shootsLeft - 1;
+		} else {
+			shootsLeft = shootsLeft - 1;
 			textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
 		}
 
@@ -72,7 +77,16 @@ public class GameMaster : MonoBehaviour {
 		if(other.layer == LayerMask.NameToLayer("circles")){
 			ArrayList path = args.projectile.GetPath();
 			if(path.Count > 5){
-			
+				Vector2 nodePos;
+				do{
+					int index = Random.Range(5, path.Count);
+					nodePos = ((GameObject)path[index]).transform.position;
+					path.RemoveAt(index);
+					spawner.SpawnCircle(Random.Range(RadiusRange.x, RadiusRange.y), nodePos);
+
+				}while(nodePos.y < 2);
+
+
 			}
 			Destroy(args.projectile.gameObject);
 			cannon.canFire = true;

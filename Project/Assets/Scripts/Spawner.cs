@@ -45,12 +45,12 @@ public class Spawner : MonoBehaviour {
 		for (int i = 0; i< count; i++) {
 			float radius = Random.Range(radiusRange.x, radiusRange.y);
 			float x = Random.Range(Stage.xMin + radius, Stage.xMax -radius);
-			float y = Random.Range(Stage.yMin + radius, Stage.yMax - radius);
+			float y = Random.Range(Stage.yMin + radius +2, Stage.yMax - radius);
 			SpawnCircle(radius, new Vector2(x,y));
 
 		}
 	}
-	void SpawnCircle(float radius, Vector2 position){
+	public void SpawnCircle(float radius, Vector2 position){
 
 		GameObject circle = (GameObject)Instantiate (CirclePrefab);
 		circle.transform.position = position;

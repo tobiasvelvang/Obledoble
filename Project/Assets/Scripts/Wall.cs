@@ -15,6 +15,7 @@ public class Wall : MonoBehaviour {
 		}
 
 
+
 	}
 		
 
