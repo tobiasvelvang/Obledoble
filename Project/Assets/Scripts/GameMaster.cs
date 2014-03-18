@@ -2,8 +2,11 @@
 using System.Collections;
 
 public class GameMaster : MonoBehaviour {
+	public int NumberOfCircles;
+	public Vector2 RadiusRange;
 	public GameObject cannonObject;
 	public GameObject scoreTextObject;
+
 	public int shootsLeft = 3;
 	public float timelapsed = 0F;
 	TextMesh textMesh;
@@ -11,7 +14,7 @@ public class GameMaster : MonoBehaviour {
 	TextMesh totalScoreField;
 	float totalScore;
 	public int multiplier = 1;
-
+	private Spawner spawner;
 	public bool gamedone;
 
 
@@ -22,6 +25,9 @@ public class GameMaster : MonoBehaviour {
 		cannon = cannonObject.GetComponent<Cannon> ();
 		cannon.onCannonFire += onFire;
 		cannon.canFire = true;
+	
+		spawner = GetComponent<Spawner> ();
+		spawner.SpawnCircles (NumberOfCircles, RadiusRange);
 		textMesh = GetComponent<TextMesh> ();
 		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "X" + multiplier;
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
@@ -64,6 +70,10 @@ public class GameMaster : MonoBehaviour {
 	public void onCollide(object sender, ProjectileEvent args){
 		GameObject other = args.other;
 		if(other.layer == LayerMask.NameToLayer("circles")){
+			ArrayList path = args.projectile.GetPath();
+			if(path.Count > 5){
+			
+			}
 			Destroy(args.projectile.gameObject);
 			cannon.canFire = true;
 			changeScore(totalScore + timelapsed * multiplier);
@@ -75,10 +85,10 @@ public class GameMaster : MonoBehaviour {
 
 		
 		}if (other.layer == LayerMask.NameToLayer ("walls")) {
-			multiplier += 1;
-				}
+				multiplier += 1;
+			}
 		if (shootsLeft == 0) {
-						cannon.canFire = false;
+				cannon.canFire = false;
 						
 		}
 

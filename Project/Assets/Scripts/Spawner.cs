@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class Spawner : MonoBehaviour {
-	public int NumberOfCircles;
-	public Vector2 RadiusRange;
+
 	public Rect Stage;
 	public GameObject CirclePrefab;
 	public GameObject WallPrefab;
 	// Use this for initialization
 	void Start () {
-		SpawnCircles (NumberOfCircles, RadiusRange, Stage);
+
 		GameObject left = (GameObject)Instantiate (WallPrefab);
 		left.tag = "left";
 		GameObject top = (GameObject)Instantiate (WallPrefab);
@@ -42,11 +41,11 @@ public class Spawner : MonoBehaviour {
 
 	}
 
-	void SpawnCircles (int count, Vector2 radiusRange, Rect stage){
+	public void SpawnCircles (int count, Vector2 radiusRange){
 		for (int i = 0; i< count; i++) {
 			float radius = Random.Range(radiusRange.x, radiusRange.y);
-			float x = Random.Range(stage.xMin + radius, stage.xMax -radius);
-			float y = Random.Range(stage.yMin + radius, stage.yMax - radius);
+			float x = Random.Range(Stage.xMin + radius, Stage.xMax -radius);
+			float y = Random.Range(Stage.yMin + radius, Stage.yMax - radius);
 			SpawnCircle(radius, new Vector2(x,y));
 
 		}
