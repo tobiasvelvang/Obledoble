@@ -15,6 +15,7 @@ public class ListModedl<T>: IEnumerable<T>, IEnumerable{
 
 	}
 	public void add(T item){
+
 		items.Add (item);
 		if (OnListChange != null)
 			OnListChange (this, new ListChangeEventArgs (){ index = items.Count -1 });

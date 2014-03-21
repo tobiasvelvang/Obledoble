@@ -2,22 +2,61 @@
 using System.Collections;
 
 public class ScrollView : MonoBehaviour {
-
+	public GameObject Content;
+	public Vector2 Size;
 	// Use this for initialization
 	void Start () {
-		RecalculateBounds ();
+		BoxCollider2D collider = (BoxCollider2D)collider2D;
+		collider.size = Size;
+
 	
 	}
 
-	public void RecalculateBounds(){
-		Bounds bounds = new Bounds ();
-		foreach (Renderer renderer in GetComponentsInChildren<Renderer>()) {
+	private Vector2 MousePosition;
+	void BeginDrag(){
+		MousePosition = Input.mousePosition;
 
-			bounds.Encapsulate(renderer.bounds);
-		}
-		BoxCollider2D boxCollider = (BoxCollider2D)collider2D;
-		boxCollider.size = new Vector2 (bounds.extents.x*2, bounds.extents.y*2);
 	}
+
+	void Dragging(){
+		float changeY = (Input.mousePosition.y - MousePosition.y)*Time.deltaTime;
+		MousePosition = Input.mousePosition;
+
+
+		Scroll (changeY);
+	}
+
+	void Scroll(float amount){
+		if (amount < 0) {
+			float contentTop = Content.renderer.bounds.max.y;
+			if(transform.InverseTransformPoint(new Vector2(0, contentTop)).y + amount < transform.position.y + Size.y/2.0f){
+				return;
+			}
+		}else{
+			Debug.Log(amount);
+			float contentBottom = Content.renderer.bounds.min.y;
+			if(transform.InverseTransformPoint(new Vector2(0, contentBottom)).y + amount > transform.position.y - Size.y/2.0f){
+				return;
+				
+			}
+
+		}
+
+		Vector2 pos = Content.transform.position;
+		pos.y += amount;
+		Content.transform.position = pos;
+
+	}
+
+
+	void OnMouseDown(){
+		BeginDrag ();
+	}
+
+	void OnMouseDrag(){
+		Dragging ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
