@@ -35,7 +35,6 @@ public class GameMaster : MonoBehaviour {
 		spawner.SpawnCircle (0.5f, new Vector2 (spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
 		spawner.SpawnCircle (0.06f, new Vector2 (spawner.Stage.xMax/2, spawner.Stage.yMax));
 		textMesh = GetComponent<TextMesh> ();
-		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "X" + multiplier;
 
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
 		changeScore (0);
