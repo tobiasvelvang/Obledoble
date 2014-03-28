@@ -179,7 +179,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 240
+  m_FontSize: 230
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -215,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 1841964145}
   m_GameObject: {fileID: 673509005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0981221199, y: 0, z: 0}
+  m_LocalPosition: {x: .0847091675, y: .0365657806, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -347,8 +347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonObject: {fileID: 1694744899}
   scoreTextObject: {fileID: 68350762}
-  shootsLeft: 3
   timelapsed: 0
+  ResetButtonPrefab: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
   multiplier: 1
   gamedone: 0
 --- !u!114 &1020538778
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24bf12f30c1e4842a3cf8ffae094aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfCircles: 15
+  NumberOfCircles: 10
   RadiusRange: {x: .0500000007, y: .699999988}
   Stage:
     serializedVersion: 2
@@ -697,7 +697,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: NumberOfCircles
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: cannonObject
@@ -715,6 +715,14 @@ Prefab:
       propertyPath: scoreTextObject
       value: 
       objectReference: {fileID: 68350762}
+    - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
+      propertyPath: shootsLeft
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
+      propertyPath: ResetButtonPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
   m_RootGameObject: {fileID: 1020538776}
@@ -933,11 +941,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 0246831fcbf5355489d2e1caad802d97, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.0981221199
+      value: .0847091675
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0246831fcbf5355489d2e1caad802d97, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: .0365657806
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0246831fcbf5355489d2e1caad802d97, type: 2}
       propertyPath: m_LocalPosition.z
@@ -967,6 +975,10 @@ Prefab:
       propertyPath: Cannon
       value: 
       objectReference: {fileID: 1694744899}
+    - target: {fileID: 10200000, guid: 0246831fcbf5355489d2e1caad802d97, type: 2}
+      propertyPath: m_FontSize
+      value: 230
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0246831fcbf5355489d2e1caad802d97, type: 2}
   m_RootGameObject: {fileID: 673509005}

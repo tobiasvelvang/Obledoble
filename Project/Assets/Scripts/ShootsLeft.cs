@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 
 public class ShootsLeft : MonoBehaviour {
 	public GameObject Cannon;
 	private Cannon cannonScript;
 	private Projectile currentProjectile;
 	TextMesh shootsLeftText;
-	int shootsLeft = 3;
+
 
 	public Vector2 pos;
 	public float i;
@@ -16,11 +16,12 @@ public class ShootsLeft : MonoBehaviour {
 
 		shootsLeftText = GetComponent<TextMesh> ();
 		shootsLeftText.text = "  3 BALLS LEFT";
-		Vector2 pos = transform.position;
-		float i = 0F;
+//			Vector2 pos = transform.position;
+		//float i = 0F;
 		cannonScript = Cannon.GetComponent<Cannon> ();
 		cannonScript.onCannonFire += onCanonFire;
-
+		Debug.Log (cannonScript.shootsLeft);
+	
 	}
 	
 	// Update is called once per frame
@@ -36,20 +37,20 @@ public class ShootsLeft : MonoBehaviour {
 		}
 	public void textFloatIn(object sender, ProjectileEvent args){
 		if(!(args.other.layer == LayerMask.NameToLayer("circles"))) return;
-		Debug.Log ("CheeseFuck");
+
 		pos.y = 0;
 		transform.position = pos;
 
 
 		StartCoroutine ("fadeIn");
-				}
+	}
 
-	IEnumerator fadeIn(){
-		shootsLeft -= 1;
-		if (shootsLeft == 1) {
-						shootsLeftText.text ="  " + shootsLeft + " BALL LEFT!";
+	public IEnumerator fadeIn(){
+		//shootsLeft -= 1;
+		if (cannonScript.shootsLeft == 1) {
+						shootsLeftText.text ="  " + cannonScript.shootsLeft + " BALL LEFT!";
 				} else {
-						shootsLeftText.text ="  " + shootsLeft + " BALLS LEFT!";
+						shootsLeftText.text ="  " + cannonScript.shootsLeft + " BALLS LEFT!";
 				}
 		Color fadeColor;
 		fadeColor = renderer.material.color;
@@ -59,7 +60,7 @@ public class ShootsLeft : MonoBehaviour {
 			renderer.material.color = fadeColor;
 			pos.y = i;
 			transform.position = pos; 
-			yield return new WaitForEndOfFrame();
+			yield return new WaitForSeconds(0.01F);
 			//yield return new WaitForSeconds(0.1F);
 		}
 		}
