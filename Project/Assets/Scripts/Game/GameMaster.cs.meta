@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 8b39d4bfe23f06948a45683aafe4d6d5
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cannonObject: {instanceID: 0}
+  - scoreTextObject: {instanceID: 0}
+  - ResetButtonPrefab: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

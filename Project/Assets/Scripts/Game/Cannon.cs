@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using System;
@@ -7,8 +7,9 @@ public class CannonFireEvent : EventArgs{
 }
 public delegate void OnCannonFire(object sender, CannonFireEvent args);
 public class Cannon : MonoBehaviour {
-
+	public int shootsLeft{ get; set; }
 	public bool canFire;
+
 	public OnCannonFire onCannonFire;
 	public GameObject ProjectilePrefab;
 	float xMouse = 0.0F;
@@ -16,7 +17,7 @@ public class Cannon : MonoBehaviour {
 	bool mousedown;
 	// Use this for initialization
 	void Start () {
-	
+		this.shootsLeft = 7;
 	
 	}
 	
@@ -43,8 +44,8 @@ public class Cannon : MonoBehaviour {
 			}
 	}
 	void fire(){
-		if(!canFire) return;
-
+		if(!canFire || shootsLeft == 0) return;
+		shootsLeft--;
 		GameObject projectile = (GameObject) Instantiate (ProjectilePrefab);
 		projectile.transform.position = transform.position;
 		Projectile projectileScript = projectile.GetComponent < Projectile> ();

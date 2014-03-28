@@ -7,8 +7,8 @@ public class GameMaster : MonoBehaviour {
 	public GameObject cannonObject;
 	public GameObject scoreTextObject;
 
-	public int shootsLeft = 3;
 	public float timelapsed = 0F;
+	public GameObject ResetButtonPrefab;
 	TextMesh textMesh;
 	TextMesh score;
 	TextMesh totalScoreField;
@@ -22,9 +22,11 @@ public class GameMaster : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		cannon = cannonObject.GetComponent<Cannon> ();
 		cannon.onCannonFire += onFire;
 		cannon.canFire = true;
+
 	
 		spawner = GetComponent<Spawner> ();
 		spawner.SpawnCircles (NumberOfCircles, RadiusRange);
@@ -34,6 +36,7 @@ public class GameMaster : MonoBehaviour {
 		spawner.SpawnCircle (0.06f, new Vector2 (spawner.Stage.xMax/2, spawner.Stage.yMax));
 		textMesh = GetComponent<TextMesh> ();
 		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "X" + multiplier;
+
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
 		changeScore (0);
 
@@ -52,23 +55,13 @@ public class GameMaster : MonoBehaviour {
 			timelapsed += Time.deltaTime*10;
 
 				}
-		if (shootsLeft == 0) {
-						
-				} else {
-						textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
-				}
-
 	}
+
+
 	public void onFire(object sender, CannonFireEvent args){
-		Debug.Log ("poop");
 		args.projectile.onCollideHandler += onCollide ;
 		cannon.canFire = false;
-		if (shootsLeft == 0) {
-						
-		} else {
-			shootsLeft = shootsLeft - 1;
-			textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "*" + multiplier;
-		}
+
 
 
 	}
@@ -92,20 +85,45 @@ public class GameMaster : MonoBehaviour {
 			cannon.canFire = true;
 			changeScore(totalScore + timelapsed * multiplier);
 			timelapsed = 0F;
-			multiplier = 0;
-			if(shootsLeft == 0){
+			multiplier = 1;
+			if(cannon.shootsLeft == 0){
 				gamedone = true;
+				GameObject resetButton = (GameObject)Instantiate(ResetButtonPrefab);
+				ResetButton buttonScript = resetButton.GetComponent<ResetButton>();
+				buttonScript.onClick += ResetGame;
+				
 			}
 
 		
 		}if (other.layer == LayerMask.NameToLayer ("walls")) {
-				multiplier += 1;
-			}
-		if (shootsLeft == 0) {
-				cannon.canFire = false;
+
+			multiplier += 1;
+		}
+		if (cannon.shootsLeft == 0) {
+			cannon.canFire = false;
+
 						
 		}
 
-	}
 
+	}
+	public string stringToEdit = "Hello World";
+	void OnGUI() {
+		if (gamedone) {
+			stringToEdit = GUI.TextField (new Rect (33, 300, 200, 20), stringToEdit, 25);
+		}
+	}
+	public void ResetGame(GameObject sender){
+
+		//OnGUI ();
+		Debug.Log ("ppopo");
+		cannon.shootsLeft = 7;
+		cannon.canFire = true;
+		changeScore (0);
+		Destroy (sender);
+		gamedone = false;
+
+
+	
+	}
 }
