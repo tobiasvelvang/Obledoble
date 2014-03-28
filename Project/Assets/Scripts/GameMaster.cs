@@ -2,9 +2,11 @@
 using System.Collections;
 
 public class GameMaster : MonoBehaviour {
+	public int NumberOfCircles;
+	public Vector2 RadiusRange;
 	public GameObject cannonObject;
 	public GameObject scoreTextObject;
-	private int shootsLeft = 7;
+
 	public float timelapsed = 0F;
 	public GameObject ResetButtonPrefab;
 	TextMesh textMesh;
@@ -12,7 +14,7 @@ public class GameMaster : MonoBehaviour {
 	TextMesh totalScoreField;
 	float totalScore;
 	public int multiplier = 1;
-
+	private Spawner spawner;
 	public bool gamedone;
 
 
@@ -25,9 +27,19 @@ public class GameMaster : MonoBehaviour {
 		cannon.onCannonFire += onFire;
 		cannon.canFire = true;
 
+	
+		spawner = GetComponent<Spawner> ();
+		spawner.SpawnCircles (NumberOfCircles, RadiusRange);
+
+		//Add "anti cheat"
+		spawner.SpawnCircle (0.5f, new Vector2 (spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
+		spawner.SpawnCircle (0.06f, new Vector2 (spawner.Stage.xMax/2, spawner.Stage.yMax));
+		textMesh = GetComponent<TextMesh> ();
+		textMesh.text = "Shots left: " + shootsLeft + "Score: " + (int)timelapsed + "X" + multiplier;
 
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
 		changeScore (0);
+
 	
 	}
 	void changeScore(float newScore){
@@ -56,6 +68,19 @@ public class GameMaster : MonoBehaviour {
 	public void onCollide(object sender, ProjectileEvent args){
 		GameObject other = args.other;
 		if(other.layer == LayerMask.NameToLayer("circles")){
+			ArrayList path = args.projectile.GetPath();
+			if(path.Count > 5){
+				Vector2 nodePos;
+				do{
+					int index = Random.Range(5, path.Count);
+					nodePos = ((GameObject)path[index]).transform.position;
+					path.RemoveAt(index);
+					spawner.SpawnCircle(Random.Range(RadiusRange.x, RadiusRange.y), nodePos);
+
+				}while(nodePos.y < 2);
+
+
+			}
 			Destroy(args.projectile.gameObject);
 			cannon.canFire = true;
 			changeScore(totalScore + timelapsed * multiplier);
@@ -71,10 +96,12 @@ public class GameMaster : MonoBehaviour {
 
 		
 		}if (other.layer == LayerMask.NameToLayer ("walls")) {
+
 			multiplier += 1;
 		}
 		if (cannon.shootsLeft == 0) {
 			cannon.canFire = false;
+
 						
 		}
 

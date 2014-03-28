@@ -73,6 +73,10 @@ public class Projectile : MonoBehaviour {
 		nodes.Add (node);
 	}
 
+	public ArrayList GetPath(){
+
+		return this.nodes;
+	}
 
 
 
