@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b39d4bfe23f06948a45683aafe4d6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfCircles: 0
-  RadiusRange: {x: .100000001, y: .5}
+  NumberOfCircles: 4
+  RadiusRange: {x: .300000012, y: 1}
   cannonObject: {fileID: 1694744899}
   scoreTextObject: {fileID: 68350762}
   timelapsed: 0
@@ -738,15 +738,15 @@ Prefab:
       objectReference: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: RadiusRange.x
-      value: .100000001
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: RadiusRange.y
-      value: .5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
       propertyPath: NumberOfCircles
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}

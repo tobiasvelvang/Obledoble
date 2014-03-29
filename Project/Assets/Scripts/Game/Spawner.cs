@@ -50,13 +50,13 @@ public class Spawner : MonoBehaviour {
 
 		}
 	}
-	public void SpawnCircle(float radius, Vector2 position){
+	public GameObject SpawnCircle(float radius, Vector2 position){
 
 		GameObject circle = (GameObject)Instantiate (CirclePrefab);
 		circle.transform.position = position;
 		Circle script = circle.GetComponent<Circle> ();
 		script.Radius = radius;
-
+		return circle;
 
 
 	}

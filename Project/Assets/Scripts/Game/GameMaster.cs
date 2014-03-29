@@ -31,10 +31,7 @@ public class GameMaster : MonoBehaviour {
 		spawner = GetComponent<Spawner> ();
 		spawner.SpawnCircles (NumberOfCircles, RadiusRange);
 
-		//Add "anti cheat"
-		spawner.SpawnCircle (0.5f, new Vector2 (spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
-		spawner.SpawnCircle (0.06f, new Vector2 (spawner.Stage.xMax/2, spawner.Stage.yMax));
-		textMesh = GetComponent<TextMesh> ();
+
 
 		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
 		changeScore (0);
@@ -53,7 +50,7 @@ public class GameMaster : MonoBehaviour {
 		if (!(cannon.canFire) && !(gamedone)) {
 			timelapsed += Time.deltaTime*10;
 
-			}
+		}
 	}
 
 
@@ -62,34 +59,24 @@ public class GameMaster : MonoBehaviour {
 		args.projectile.OnDirectionChange += OnProjectileDirectionChange;
 		cannon.canFire = false;
 
-
+		Vector2 spawnPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		spawner.SpawnCircle (0.2f, spawnPos);
 
 	}
 
 	public void OnProjectileDirectionChange(object sender, ProjectileDirectionChangeEvent args){
-		Vector2 spawnPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		spawner.SpawnCircle (0.2f, spawnPos);
+		args.projectile.Ignore = spawner.SpawnCircle (0.2f, args.projectile.transform.position);
+		
 
 	}
 	public void OnCollide(object sender, ProjectileEvent args){
 		GameObject other = args.other;
 		if(other.layer == LayerMask.NameToLayer("circles")){
-			ArrayList path = args.projectile.GetPath();
-			if(path.Count > 5 && other.transform.position.y >= 2){
-				Vector2 nodePos;
-				do{
-					int index = Random.Range(5, path.Count);
-					nodePos = ((GameObject)path[index]).transform.position;
-					path.RemoveAt(index);
-				}while(nodePos.y < 2);
-				spawner.SpawnCircle(Random.Range(RadiusRange.x, RadiusRange.y), nodePos);
-
-			}
+		
 			Destroy(args.projectile.gameObject);
 			cannon.canFire = true;
 			changeScore(totalScore + timelapsed * multiplier);
 			timelapsed = 0F;
-			multiplier = 1;
 			if(cannon.shootsLeft == 0){
 				gamedone = true;
 				GameObject resetButton = (GameObject)Instantiate(ResetButtonPrefab);
