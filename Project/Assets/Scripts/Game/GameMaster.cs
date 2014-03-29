@@ -121,6 +121,7 @@ public class GameMaster : MonoBehaviour {
 		changeScore (0);
 		Destroy (sender);
 		gamedone = false;
+		Application.LoadLevel ("Obledoble");
 
 
 	
