@@ -11,10 +11,10 @@ public delegate void OnButtonClick(GameObject sender);
 public class ResetButton : MonoBehaviour {
 
 
-	public OnButtonClick onClick;
+    public OnButtonClick onClick;
 
-	void OnMouseUp(){
-		onClick(this.gameObject);
+    void OnMouseUp() {
+        onClick(this.gameObject);
 
-	}
+    }
 }
