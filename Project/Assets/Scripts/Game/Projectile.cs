@@ -7,17 +7,24 @@ public class ProjectileEvent: EventArgs{
 	public GameObject other;
 }
 
-public delegate void OnProjectileCollideHandler(object sender, ProjectileEvent args);
+public class ProjectileDirectionChangeEvent: EventArgs{
+	public Projectile projectile;
 
+}
+
+public delegate void OnProjectileCollideHandler(object sender, ProjectileEvent args);
+public delegate void OnProjectileDirectionChangeHandler(object sender, ProjectileDirectionChangeEvent  args);
 public class Projectile : MonoBehaviour {
 
 	public Vector2 Direction;
 	public float Speed;
 	public GameObject PathNodePrefab;
 	public float NodePlacementDistance;
-	public OnProjectileCollideHandler onCollideHandler;
+	public OnProjectileCollideHandler OnCollide;
+	public OnProjectileDirectionChangeHandler OnDirectionChange;
 	private float TraveledDistance;
 	private ArrayList nodes;
+	private bool mouseDown = true;
 	void Start () {
 		Direction.Normalize ();
 		rigidbody2D.velocity = Direction * Speed;
@@ -36,13 +43,33 @@ public class Projectile : MonoBehaviour {
 		TraveledDistance += movement.magnitude;
 		if (TraveledDistance >= NodePlacementDistance) {
 			float diff = TraveledDistance - NodePlacementDistance;
-			Vector2 nodePos = transform.position - (Vector3)Direction*diff;
+			Vector2 nodePos = (transform.position - (Vector3)Direction*diff);
 			PlacePathNode(nodePos);
 			TraveledDistance = diff;
 		}
 
+		if (Input.GetMouseButton (0)) {
+			if(!mouseDown){
+				ChangeDirection();
+
+			}
+			mouseDown = true;
+		}else{
+
+			mouseDown = false;
+		}
+
 	}
 
+	void ChangeDirection(){
+
+		Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+		Direction = Input.mousePosition- screenPos;
+		Direction.Normalize();
+		if(OnDirectionChange != null)
+			OnDirectionChange(this.gameObject, new ProjectileDirectionChangeEvent(){ projectile = this});
+
+	}
 	void OnCollisionEnter2D(Collision2D col){
 		GameObject other = col.gameObject;
 		if(other.layer == LayerMask.NameToLayer("walls")){
@@ -55,8 +82,8 @@ public class Projectile : MonoBehaviour {
 			rigidbody2D.velocity = Direction*Speed;
 		}
 
-		if(onCollideHandler != null)
-			onCollideHandler(this, new ProjectileEvent{ projectile = this , other = col.gameObject});
+		if(OnCollide != null)
+			OnCollide(this, new ProjectileEvent{ projectile = this , other = col.gameObject});
 
 
 

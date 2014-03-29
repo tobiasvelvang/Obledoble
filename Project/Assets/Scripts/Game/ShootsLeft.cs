@@ -32,7 +32,7 @@ public class ShootsLeft : MonoBehaviour {
 	public void onCanonFire(object sender, CannonFireEvent args){
 		Projectile projectile = args.projectile;
 
-		projectile.onCollideHandler += textFloatIn;
+		projectile.OnCollide += textFloatIn;
 	
 		}
 	public void textFloatIn(object sender, ProjectileEvent args){

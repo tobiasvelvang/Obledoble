@@ -53,31 +53,36 @@ public class GameMaster : MonoBehaviour {
 		if (!(cannon.canFire) && !(gamedone)) {
 			timelapsed += Time.deltaTime*10;
 
-				}
+			}
 	}
 
 
 	public void onFire(object sender, CannonFireEvent args){
-		args.projectile.onCollideHandler += onCollide ;
+		args.projectile.OnCollide += OnCollide ;
+		args.projectile.OnDirectionChange += OnProjectileDirectionChange;
 		cannon.canFire = false;
 
 
 
 	}
-	public void onCollide(object sender, ProjectileEvent args){
+
+	public void OnProjectileDirectionChange(object sender, ProjectileDirectionChangeEvent args){
+		Vector2 spawnPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		spawner.SpawnCircle (0.2f, spawnPos);
+
+	}
+	public void OnCollide(object sender, ProjectileEvent args){
 		GameObject other = args.other;
 		if(other.layer == LayerMask.NameToLayer("circles")){
 			ArrayList path = args.projectile.GetPath();
-			if(path.Count > 5){
+			if(path.Count > 5 && other.transform.position.y >= 2){
 				Vector2 nodePos;
 				do{
 					int index = Random.Range(5, path.Count);
 					nodePos = ((GameObject)path[index]).transform.position;
 					path.RemoveAt(index);
-					spawner.SpawnCircle(Random.Range(RadiusRange.x, RadiusRange.y), nodePos);
-
 				}while(nodePos.y < 2);
-
+				spawner.SpawnCircle(Random.Range(RadiusRange.x, RadiusRange.y), nodePos);
 
 			}
 			Destroy(args.projectile.gameObject);
