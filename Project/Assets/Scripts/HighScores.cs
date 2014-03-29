@@ -12,6 +12,8 @@ public class HighScores {
 	private const string highscoreURL = "http://piscores.no-ip.org/doblescore.php?count=100";
 	private const string postScoreURL = "http://piscores.no-ip.org/doblescore.php";
 	private const string secret = "8bb3cdf465001bc0ab";
+	private const string localKey = "highscore";
+
 	public RequestFinishedEvent OnRequestComplete;
 
 	public IEnumerator GetGlobalHighScores(){
@@ -31,6 +33,14 @@ public class HighScores {
 
 	}
 
+	public void SetLocalHighScore(int score){
+		PlayerPrefs.SetInt (localKey, score);
+
+	}
+
+	public int GetLocalHighScore(){
+		return PlayerPrefs.GetInt (localKey);
+	}
 	public IEnumerator PostScore(string name, int score){
 		WWWForm form = new WWWForm ();
 		form.AddField ("name", name);

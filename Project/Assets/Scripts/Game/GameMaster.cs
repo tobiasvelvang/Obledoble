@@ -6,18 +6,17 @@ public class GameMaster : MonoBehaviour {
 	public Vector2 RadiusRange;
 	public GameObject cannonObject;
 	public GameObject scoreTextObject;
-
-	public float timelapsed = 0F;
+	
 	public GameObject ResetButtonPrefab;
 	TextMesh textMesh;
 	TextMesh score;
-	TextMesh totalScoreField;
-	float totalScore;
-	public int multiplier = 1;
+	TextMesh RoundScoreField;
+	float RoundScore;
+	float TotalScore;
 	private Spawner spawner;
 	public bool gamedone;
 
-
+	private HighScores LocalHighscore = new HighScores ();
 	Cannon cannon;
 
 	// Use this for initialization
@@ -33,25 +32,30 @@ public class GameMaster : MonoBehaviour {
 
 
 
-		totalScoreField = scoreTextObject.GetComponent<TextMesh> ();
-		changeScore (0);
+		RoundScoreField = scoreTextObject.GetComponent<TextMesh> ();
+		DisplayRoundScore (0);
 
 	
 	}
-	void changeScore(float newScore){
-		totalScore = newScore;
-		totalScoreField.text = "" + (int)totalScore;
+	void DisplayRoundScore(float score){
 
-		}
+		RoundScoreField.text = "" + (int)score;
+
+	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		if (!(cannon.canFire) && !(gamedone)) {
-			timelapsed += Time.deltaTime*10;
+			RoundScore += 10.0f*Time.deltaTime;
+			Debug.Log(RoundScore);
+			DisplayRoundScore(RoundScore);
 
 		}
+
+
 	}
+
 
 
 	public void onFire(object sender, CannonFireEvent args){
@@ -75,10 +79,17 @@ public class GameMaster : MonoBehaviour {
 		
 			Destroy(args.projectile.gameObject);
 			cannon.canFire = true;
-			changeScore(totalScore + timelapsed * multiplier);
-			timelapsed = 0F;
+			TotalScore += RoundScore;
+			RoundScore = 0;
+			DisplayRoundScore(RoundScore);
+			
 			if(cannon.shootsLeft == 0){
 				gamedone = true;
+
+				if (TotalScore > LocalHighscore.GetLocalHighScore ()) {
+					LocalHighscore.SetLocalHighScore((int)TotalScore);
+					
+				}
 				GameObject resetButton = (GameObject)Instantiate(ResetButtonPrefab);
 				ResetButton buttonScript = resetButton.GetComponent<ResetButton>();
 				buttonScript.onClick += ResetGame;
@@ -86,10 +97,8 @@ public class GameMaster : MonoBehaviour {
 			}
 
 		
-		}if (other.layer == LayerMask.NameToLayer ("walls")) {
-
-			multiplier += 1;
 		}
+
 		if (cannon.shootsLeft == 0) {
 			cannon.canFire = false;
 
@@ -103,14 +112,19 @@ public class GameMaster : MonoBehaviour {
 		if (gamedone) {
 			stringToEdit = GUI.TextField (new Rect (33, 300, 200, 20), stringToEdit, 25);
 		}
+
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+		GUI.Label (new Rect (10, 5, 80, 40), "Total score \n" + (int)TotalScore);
+		GUI.Label (new Rect (Screen.width - 90, 5, 80, 40), "Personal best \n" + LocalHighscore.GetLocalHighScore());
 	}
 	public void ResetGame(GameObject sender){
 
-		//OnGUI ();
+
+
 		Debug.Log ("ppopo");
 		cannon.shootsLeft = 7;
 		cannon.canFire = true;
-		changeScore (0);
+		DisplayRoundScore (0);
 		Destroy (sender);
 		gamedone = false;
 		Application.LoadLevel ("Obledoble");
