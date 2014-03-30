@@ -15,8 +15,15 @@ public class GameMaster : MonoBehaviour {
     float TotalScore;
     int multiplier;
     private Spawner spawner;
-    public bool gamedone;
-	public EndOfGameMenuScript endOfGameMenuScript;
+    private bool gamedone;
+	private  EndOfGameMenuScript endOfGameMenuScript;
+
+ 
+    private ScoreCounter TotalScoreField;
+    public GameObject TotalScoreObject;
+
+    private ScoreCounter BestScoreField;
+    public GameObject BestScoreObject;
 
     private HighScores LocalHighscore = new HighScores();
     Cannon cannon;
@@ -28,11 +35,12 @@ public class GameMaster : MonoBehaviour {
         cannon.onCannonFire += onFire;
         cannon.canFire = true;
 
-
+       
         spawner = GetComponent<Spawner>();
         spawner.SpawnCircles(NumberOfCircles, RadiusRange);
         RoundScoreField = scoreTextObject.GetComponent<TextMesh>();
 
+        multiplier = 1;
         cannon.shootsLeft = 7;
         cannon.canFire = true;
         DisplayRoundScore(0, multiplier);
@@ -40,6 +48,12 @@ public class GameMaster : MonoBehaviour {
 
         spawner.SpawnCircle(0.5f, new Vector2(spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
         spawner.SpawnCircle(0.06f, new Vector2(spawner.Stage.xMax / 2, spawner.Stage.yMax));
+
+        TotalScoreField = TotalScoreObject.GetComponentInChildren<ScoreCounter>();
+        TotalScoreField.DisplayedText = "" + 0;
+
+        BestScoreField = BestScoreObject.GetComponentInChildren<ScoreCounter>();
+        BestScoreField.DisplayedText = "" + LocalHighscore.GetLocalHighScore();
 
     }
     void DisplayRoundScore(float score, int multiplier) {
@@ -81,6 +95,8 @@ public class GameMaster : MonoBehaviour {
             Destroy(args.projectile.gameObject);
             cannon.canFire = true;
             TotalScore += RoundScore*multiplier;
+            TotalScoreField.DisplayedText = "" + (int)TotalScore;
+            TotalScoreField.BeginAnimating();
             RoundScore = 0;
             multiplier = 1;
             DisplayRoundScore(RoundScore, multiplier);
@@ -90,6 +106,8 @@ public class GameMaster : MonoBehaviour {
 
                 if (TotalScore > LocalHighscore.GetLocalHighScore()) {
                     LocalHighscore.SetLocalHighScore((int)TotalScore);
+                    BestScoreField.DisplayedText = "" + (int)TotalScore;
+                    BestScoreField.BeginAnimating();
 
                 }
               
