@@ -7,7 +7,7 @@ public class Instructions : MonoBehaviour {
 	void OnGUI () {
 		string instructionText = "Noe!";
 
-		instructionText = GUI.TextArea(Rect(10,10,200,100),instructionText, 200);
+		instructionText = GUI.TextArea(new Rect(10,10,200,100),instructionText, 200);
 	}
 
 
