@@ -11,6 +11,7 @@ public delegate void OnButtonClick(GameObject sender);
 public class ResetButton : MonoBehaviour {
 	public Texture2D redBubble;
 
+
 	public GUISkin restartSkin;
 	public OnButtonClick onClick;
 	private Rect windowRect = new Rect (30, 170, 200, 200);
@@ -26,5 +27,6 @@ public class ResetButton : MonoBehaviour {
 	void OnMouseUp(){
 		onClick(this.gameObject);
 
-	}
+
+    }
 }
