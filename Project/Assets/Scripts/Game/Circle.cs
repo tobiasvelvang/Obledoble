@@ -4,7 +4,7 @@ using System.Collections;
 public class Circle : MonoBehaviour {
     public float Radius;
     public float AnimationSpeed;
-
+    private ColliderAdjuster adjuster;
     void Start() {
         Vector2 scale = transform.localScale;
         scale.x = 0;
@@ -13,6 +13,7 @@ public class Circle : MonoBehaviour {
         ((CircleCollider2D)collider2D).radius = Radius * 2;
         Color temp = this.renderer.material.color;
         temp.a = 0.5f;
+        adjuster = gameObject.GetComponent<ColliderAdjuster>();
        
 
     }
@@ -26,8 +27,7 @@ public class Circle : MonoBehaviour {
             temp.y += AnimationSpeed * Time.deltaTime;
             transform.localScale = temp;
             ((CircleCollider2D)collider2D).radius = renderer.bounds.extents.x / transform.localScale.x;
-
-
+            adjuster.Adjust();
         }
 
     }

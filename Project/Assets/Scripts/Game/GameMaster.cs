@@ -46,7 +46,7 @@ public class GameMaster : MonoBehaviour {
         DisplayRoundScore(0, multiplier);
         gamedone = false;
 
-        spawner.SpawnCircle(0.5f, new Vector2(spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
+        spawner.SpawnCircle(0.2f, new Vector2(spawner.Stage.xMax - 0.4f, spawner.Stage.yMin + 0.4f));
         spawner.SpawnCircle(0.06f, new Vector2(spawner.Stage.xMax / 2, spawner.Stage.yMax));
 
         TotalScoreField = TotalScoreObject.GetComponentInChildren<ScoreCounter>();
