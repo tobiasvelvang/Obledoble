@@ -132,7 +132,7 @@ public class GameMaster : MonoBehaviour {
 
 			endOfGameMenuScript.onClick += ResetGame;
 
-
+			endOfGameMenuScript.Score = (int)TotalScore;
 
         }
 
