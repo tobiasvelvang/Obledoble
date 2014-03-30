@@ -4,12 +4,11 @@ using System.Collections;
 public class Instructions : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
+	void OnGUI () {
+		string instructionText = "Noe!";
+
+		instructionText = GUI.TextArea(Rect(10,10,200,100),instructionText, 200);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
 }
