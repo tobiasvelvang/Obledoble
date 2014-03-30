@@ -35,6 +35,7 @@ public class Leaderboard : MonoBehaviour {
     void OnGUI() {
         int lineHeight = 30;
         GUI.skin = skin;
+        
         scrollPosition = GUI.BeginScrollView(new Rect(0, 100, Screen.width, Screen.height - 100), scrollPosition, new Rect(0, 0, Screen.width - 50, lineHeight * scoreList.Count));
         int index = 0;
         foreach (string line in scoreList) {
