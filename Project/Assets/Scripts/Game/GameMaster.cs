@@ -7,7 +7,7 @@ public class GameMaster : MonoBehaviour {
     public GameObject cannonObject;
     public GameObject scoreTextObject;
 
-    public GameObject ResetButtonPrefab;
+    public GameObject EndOfGameMenu;
     TextMesh textMesh;
     TextMesh score;
     TextMesh RoundScoreField;
@@ -16,6 +16,7 @@ public class GameMaster : MonoBehaviour {
     int multiplier;
     private Spawner spawner;
     public bool gamedone;
+	public EndOfGameMenuScript endOfGameMenuScript;
 
     private HighScores LocalHighscore = new HighScores();
     Cannon cannon;
@@ -104,17 +105,24 @@ public class GameMaster : MonoBehaviour {
             }
         } 
         if (cannon.shootsLeft == 0) {
+			Debug.Log("im here");
             cannon.canFire = false;
+
+			GameObject buttonObject = (GameObject)Instantiate(EndOfGameMenu);
+
+			endOfGameMenuScript = buttonObject.GetComponent<EndOfGameMenuScript>();
+
+			endOfGameMenuScript.onClick += ResetGame;
+
+
 
         }
 
 
     }
-    public string stringToEdit = "Hello World";
+    
     void OnGUI() {
-        if (gamedone) {
-            stringToEdit = GUI.TextField(new Rect(33, 300, 200, 20), stringToEdit, 25);
-        }
+        
 
         GUI.skin.label.alignment = TextAnchor.UpperLeft;
         

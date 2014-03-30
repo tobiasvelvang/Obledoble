@@ -361,9 +361,9 @@ MonoBehaviour:
   RadiusRange: {x: .300000012, y: 1}
   cannonObject: {fileID: 1694744899}
   scoreTextObject: {fileID: 68350762}
-  ResetButtonPrefab: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
+  EndOfGameMenu: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
   gamedone: 0
-  stringToEdit: Hello World
+  endOfGameMenuScript: {fileID: 0}
 --- !u!114 &1020538778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,6 +746,15 @@ Prefab:
       propertyPath: NumberOfCircles
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
+      propertyPath: resetButton
+      value: 
+      objectReference: {fileID: 11400000, guid: 432215af5aa559f45a791a721de5c8be,
+        type: 2}
+    - target: {fileID: 11400002, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
+      propertyPath: EndOfGameMenu
+      value: 
+      objectReference: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34269be930498cf4abe9ee0e80a3eed8, type: 2}
   m_RootGameObject: {fileID: 1020538776}
