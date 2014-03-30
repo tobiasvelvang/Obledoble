@@ -361,9 +361,7 @@ MonoBehaviour:
   RadiusRange: {x: .300000012, y: 1}
   cannonObject: {fileID: 1694744899}
   scoreTextObject: {fileID: 68350762}
-  timelapsed: 0
   ResetButtonPrefab: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
-  multiplier: 1
   gamedone: 0
   stringToEdit: Hello World
 --- !u!114 &1020538778
