@@ -47,13 +47,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0351f0ca612ed0b498dea925536c8ada, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dd5a58c48e8f411dafc16cc747a0e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redBubble: {fileID: 2800000, guid: eb9478de395a6462d953281ba8e886b7, type: 3}
-  restart: {fileID: 2800000, guid: a6e1e7aa187954960a290a1130becb4e, type: 3}
-  submit: {fileID: 2800000, guid: b612505a4489f4840922b18d8d0e81f5, type: 3}
+  redBubble: {fileID: 2800000, guid: a6e1e7aa187954960a290a1130becb4e, type: 3}
+  restart: {fileID: 2800000, guid: 38dfc97b2af244eab83da4e24fe209a4, type: 3}
+  submit: {fileID: 2800000, guid: 43deefff4aa954959b1ac1461f4953f3, type: 3}
   restartSkin: {fileID: 11400000, guid: 64578ad922178c44c9c982d84f9fe612, type: 2}
+  textFieldString: text field
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
