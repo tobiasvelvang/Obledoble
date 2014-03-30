@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
+  - 61: {fileID: 6100000}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: EndOfGameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,10 +24,21 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.5, y: 7, z: 0}
+  m_LocalScale: {x: .971377909, y: .971377015, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!61 &6100000
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 7.23999977, y: 1.63999999}
+  m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -36,35 +47,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24bf12f30c1e4842a3cf8ffae094aca, type: 3}
+  m_Script: {fileID: 11500000, guid: 0351f0ca612ed0b498dea925536c8ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stage:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 9
-    height: 16
-  CirclePrefab: {fileID: 100000, guid: 3faef32c8d738254b9412a0c53be5597, type: 2}
-  WallPrefab: {fileID: 100000, guid: af6d713fe6577d340945a1c2da898fa1, type: 2}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b39d4bfe23f06948a45683aafe4d6d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NumberOfCircles: 0
-  RadiusRange: {x: 0, y: 0}
-  cannonObject: {fileID: 100002, guid: 132237600170a974eb9cd4ae4669e276, type: 2}
-  scoreTextObject: {fileID: 0}
-  ResetButtonPrefab: {fileID: 100000, guid: 432215af5aa559f45a791a721de5c8be, type: 2}
-  gamedone: 0
-  resetButton: {fileID: 0}
+  redBubble: {fileID: 2800000, guid: eb9478de395a6462d953281ba8e886b7, type: 3}
+  restart: {fileID: 2800000, guid: a6e1e7aa187954960a290a1130becb4e, type: 3}
+  submit: {fileID: 2800000, guid: b612505a4489f4840922b18d8d0e81f5, type: 3}
+  restartSkin: {fileID: 11400000, guid: 64578ad922178c44c9c982d84f9fe612, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

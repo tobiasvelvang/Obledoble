@@ -6,12 +6,8 @@ public class GameMaster : MonoBehaviour {
     public Vector2 RadiusRange;
     public GameObject cannonObject;
     public GameObject scoreTextObject;
-    public GameObject ResetButtonPrefab;
-    private ScoreCounter TotalScoreField;
-    public GameObject TotalScoreObject {
-        set { this.TotalScoreField = ((GameObject)value).GetComponentInChildren<ScoreCounter>(); }
 
-    }
+    public GameObject EndOfGameMenu;
     TextMesh textMesh;
     TextMesh score;
     TextMesh RoundScoreField;
@@ -20,6 +16,7 @@ public class GameMaster : MonoBehaviour {
     int multiplier;
     private Spawner spawner;
     public bool gamedone;
+	public EndOfGameMenuScript endOfGameMenuScript;
 
     private HighScores LocalHighscore = new HighScores();
     Cannon cannon;
@@ -87,7 +84,7 @@ public class GameMaster : MonoBehaviour {
             RoundScore = 0;
             multiplier = 1;
             DisplayRoundScore(RoundScore, multiplier);
-            TotalScoreField.DisplayedText = "" + TotalScore;
+
             if (cannon.shootsLeft == 0) {
                 gamedone = true;
 
@@ -108,18 +105,32 @@ public class GameMaster : MonoBehaviour {
             }
         } 
         if (cannon.shootsLeft == 0) {
+			Debug.Log("im here");
             cannon.canFire = false;
+
+			GameObject buttonObject = (GameObject)Instantiate(EndOfGameMenu);
+
+			endOfGameMenuScript = buttonObject.GetComponent<EndOfGameMenuScript>();
+
+			endOfGameMenuScript.onClick += ResetGame;
+
+
 
         }
 
 
     }
-    public string stringToEdit = "Hello World";
+    
     void OnGUI() {
-        if (gamedone) {
-            stringToEdit = GUI.TextField(new Rect(33, 300, 200, 20), stringToEdit, 25);
-        }
+        
 
+        GUI.skin.label.alignment = TextAnchor.UpperLeft;
+        
+        Debug.Log(80.0f * Screen.width / 20f);
+        float scale = Screen.width / 100.0f;
+
+        GUI.Label(new Rect(5, 5, 80.0f*scale, 40.0f*scale), "Total score \n" + (int)TotalScore);
+        GUI.Label(new Rect(Screen.width - 90, 5, 80, 40), "Personal best \n" + LocalHighscore.GetLocalHighScore());
     }
     public void ResetGame() {
         Application.LoadLevel("Obledoble");
