@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour {
     TextMesh RoundScoreField;
     float RoundScore;
     float TotalScore;
+    int multiplier;
     private Spawner spawner;
     public bool gamedone;
 
@@ -29,17 +30,20 @@ public class GameMaster : MonoBehaviour {
 
         spawner = GetComponent<Spawner>();
         spawner.SpawnCircles(NumberOfCircles, RadiusRange);
-
-
-
         RoundScoreField = scoreTextObject.GetComponent<TextMesh>();
-        DisplayRoundScore(0);
 
+        cannon.shootsLeft = 7;
+        cannon.canFire = true;
+        DisplayRoundScore(0, multiplier);
+        gamedone = false;
+
+        spawner.SpawnCircle(0.5f, new Vector2(spawner.Stage.xMax - 0.1f, spawner.Stage.yMin + 0.2f));
+        spawner.SpawnCircle(0.06f, new Vector2(spawner.Stage.xMax / 2, spawner.Stage.yMax));
 
     }
-    void DisplayRoundScore(float score) {
+    void DisplayRoundScore(float score, int multiplier) {
 
-        RoundScoreField.text = "" + (int)score;
+        RoundScoreField.text = "" + (int)score + "x" + multiplier;
 
     }
 
@@ -48,8 +52,7 @@ public class GameMaster : MonoBehaviour {
 
         if (!(cannon.canFire) && !(gamedone)) {
             RoundScore += 10.0f * Time.deltaTime;
-            Debug.Log(RoundScore);
-            DisplayRoundScore(RoundScore);
+            DisplayRoundScore(RoundScore, multiplier);
 
         }
 
@@ -63,9 +66,7 @@ public class GameMaster : MonoBehaviour {
         args.projectile.OnDirectionChange += OnProjectileDirectionChange;
         cannon.canFire = false;
 
-        Vector2 spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        spawner.SpawnCircle(0.2f, spawnPos);
-
+      
     }
 
     public void OnProjectileDirectionChange(object sender, ProjectileDirectionChangeEvent args) {
@@ -76,12 +77,12 @@ public class GameMaster : MonoBehaviour {
     public void OnCollide(object sender, ProjectileEvent args) {
         GameObject other = args.other;
         if (other.layer == LayerMask.NameToLayer("circles")) {
-
             Destroy(args.projectile.gameObject);
             cannon.canFire = true;
-            TotalScore += RoundScore;
+            TotalScore += RoundScore*multiplier;
             RoundScore = 0;
-            DisplayRoundScore(RoundScore);
+            multiplier = 1;
+            DisplayRoundScore(RoundScore, multiplier);
 
             if (cannon.shootsLeft == 0) {
                 gamedone = true;
@@ -90,18 +91,20 @@ public class GameMaster : MonoBehaviour {
                     LocalHighscore.SetLocalHighScore((int)TotalScore);
 
                 }
-                GameObject resetButton = (GameObject)Instantiate(ResetButtonPrefab);
-                ResetButton buttonScript = resetButton.GetComponent<ResetButton>();
-                buttonScript.onClick += ResetGame;
+              
 
             }
 
 
         }
+        else {
+            if(other.layer == LayerMask.NameToLayer("walls")){
+                multiplier += 1;
 
+            }
+        } 
         if (cannon.shootsLeft == 0) {
             cannon.canFire = false;
-
 
         }
 
@@ -121,19 +124,9 @@ public class GameMaster : MonoBehaviour {
         GUI.Label(new Rect(5, 5, 80.0f*scale, 40.0f*scale), "Total score \n" + (int)TotalScore);
         GUI.Label(new Rect(Screen.width - 90, 5, 80, 40), "Personal best \n" + LocalHighscore.GetLocalHighScore());
     }
-    public void ResetGame(GameObject sender) {
-
-
-
-        Debug.Log("ppopo");
-        cannon.shootsLeft = 7;
-        cannon.canFire = true;
-        DisplayRoundScore(0);
-        Destroy(sender);
-        gamedone = false;
+    public void ResetGame() {
         Application.LoadLevel("Obledoble");
-
-
-
     }
+
+   
 }

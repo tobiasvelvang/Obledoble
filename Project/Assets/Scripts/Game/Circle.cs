@@ -11,6 +11,9 @@ public class Circle : MonoBehaviour {
         scale.y = 0;
         this.transform.localScale = scale;
         ((CircleCollider2D)collider2D).radius = Radius * 2;
+        Color temp = this.renderer.material.color;
+        temp.a = 0.5f;
+       
 
     }
 

@@ -19,7 +19,7 @@ public class Leaderboard : MonoBehaviour {
     void OnRequestComplete(object sender, HighscoreRequestEventArgs args) {
 
         JSONNode node = JSON.Parse(args.response);
-        int placement = 0;
+        int placement = 1;
         foreach (JSONNode score in node.AsArray) {
             string line = placement + "." + score["name"];
             line = line.PadRight(13);
