@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour {
     void Start() {
         Direction.Normalize();
         rigidbody2D.velocity = Direction * Speed;
-
+        gameObject.GetComponent<ColliderAdjuster>().Adjust();
     }
 
 

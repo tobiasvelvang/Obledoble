@@ -6,7 +6,7 @@ public class ColliderAdjuster : MonoBehaviour {
     // Use this for initialization
     void Start() {
 
-        Adjust();
+     
     }
 
    
