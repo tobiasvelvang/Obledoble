@@ -113,8 +113,12 @@ public class GameMaster : MonoBehaviour {
             stringToEdit = GUI.TextField(new Rect(33, 300, 200, 20), stringToEdit, 25);
         }
 
-        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-        GUI.Label(new Rect(10, 5, 80, 40), "Total score \n" + (int)TotalScore);
+        GUI.skin.label.alignment = TextAnchor.UpperLeft;
+        
+        Debug.Log(80.0f * Screen.width / 20f);
+        float scale = Screen.width / 100.0f;
+
+        GUI.Label(new Rect(5, 5, 80.0f*scale, 40.0f*scale), "Total score \n" + (int)TotalScore);
         GUI.Label(new Rect(Screen.width - 90, 5, 80, 40), "Personal best \n" + LocalHighscore.GetLocalHighScore());
     }
     public void ResetGame(GameObject sender) {
